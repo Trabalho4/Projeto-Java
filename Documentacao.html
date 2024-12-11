@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passo a Passo para Testes do Projeto</title>
+</head>
+<body>
+    <h1>Passo a Passo para Realizar os Testes do Projeto</h1>
+    <h2>1. Configuração Inicial</h2>
+    <p>Certifique-se de que as dependências do projeto estão instaladas. Para isso, siga os passos abaixo:</p>
+    <ol>
+        <li>Abra o terminal na raiz do projeto.</li>
+        <li>Execute o comando:
+            <pre><code>./gradlew clean build</code></pre>
+        </li>
+        <li>Verifique se o build foi concluído com sucesso antes de continuar.</li>
+    </ol>
+
+    <h2>2. Executando o Projeto</h2>
+    <p>Para executar o projeto, use o comando abaixo no terminal:</p>
+    <pre><code>./gradlew bootRun</code></pre>
+    <p>Após executar o comando, o servidor será iniciado e estará disponível no endereço:</p>
+    <pre><code>http://localhost:8080</code></pre>
+
+    <h2>3. Testando a API com Swagger</h2>
+    <p>A interface do Swagger pode ser acessada no seguinte endereço:</p>
+    <pre><code>http://localhost:8080/swagger-ui.html</code></pre>
+    <p>Siga os passos abaixo para realizar os testes:</p>
+    <ol>
+        <li>Abra o navegador e acesse o endereço acima.</li>
+        <li>No canto superior direito, clique em "Authorize" e insira o token JWT gerado.</li>
+        <li>Teste as rotas disponíveis, como:</li>
+        <ul>
+            <li><strong>GET /api/users</strong>: Retorna a lista de todos os usuários.</li>
+            <li><strong>POST /api/users</strong>: Cria um novo usuário (preencha o JSON com os dados necessários).</li>
+            <li><strong>GET /api/users/{id}</strong>: Retorna um usuário específico.</li>
+            <li><strong>PUT /api/users/{id}</strong>: Atualiza os dados de um usuário específico.</li>
+            <li><strong>DELETE /api/users/{id}</strong>: Exclui um usuário específico.</li>
+        </ul>
+    </ol>
+
+    <h2>4. Gerando o Token JWT</h2>
+    <p>Para gerar um token JWT válido, siga os passos:</p>
+    <ol>
+        <li>Acesse o endpoint <strong>POST /api/auth/login</strong> no Swagger.</li>
+        <li>Insira o seguinte JSON no corpo da requisição:
+            <pre><code>{
+			
+		"username": "testuser",
+		"password": "password"
+	
+	(user cadastrado no BD: admin@example.com)
+	(password(admin123)
+}</code></pre>
+        </li>
+        <li>Copie o token JWT gerado no campo <code>access_token</code>.</li>
+    </ol>
+
+    <h2>5. Realizando Testes Unitários</h2>
+    <p>Para executar os testes unitários do projeto, use o comando:</p>
+    <pre><code>./gradlew test</code></pre>
+    <p>Após executar, os relatórios dos testes podem ser encontrados no seguinte diretório:</p>
+    <pre><code>build/reports/tests/test/index.html</code></pre>
+    <p>Abra o arquivo no navegador para visualizar os resultados detalhados.</p>
+
+    <h2>6. Relatório de Cobertura</h2>
+    <p>Para gerar o relatório de cobertura dos testes (utilizando JaCoCo), use o comando:</p>
+    <pre><code>./gradlew jacocoTestReport</code></pre>
+    <p>O relatório será gerado no diretório:</p>
+    <pre><code>build/reports/jacoco/test/html/index.html</code></pre>
+    <p>Acesse o arquivo no navegador para verificar a cobertura dos testes.</p>
+
+    <h2>7. Publicação do Projeto no Supabase</h2>
+    <p>Certifique-se de que as configurações de banco de dados no <code>application.properties</code> estão corretas:</p>
+    <pre><code>
+spring.datasource.url=jdbc:postgresql://aws-0-sa-east-1.pooler.supabase.com:6543/postgres
+spring.datasource.username=postgres.stwdbrfyteseupymkfle
+spring.datasource.password=@ProjetoJava2000
+</code></pre>
+    <p>Para testar a conexão, certifique-se de que o banco de dados está acessível e rodando no Supabase.</p>
+
+    <h2>8. Testando Segurança</h2>
+    <p>Teste o acesso às rotas protegidas com e sem o token JWT para garantir que a segurança está funcionando corretamente:</p>
+    <ol>
+        <li>Sem o token: as rotas protegidas devem retornar <code>403 Forbidden</code>.</li>
+        <li>Com um token inválido ou expirado: as rotas protegidas devem retornar <code>401 Unauthorized</code>.</li>
+        <li>Com um token válido: as rotas protegidas devem funcionar corretamente.</li>
+    </ol>
+
+    <h2>9. Conclusão</h2>
+    <p>Siga todos os passos acima para garantir que o projeto atenda aos requisitos especificados pelo professor. Certifique-se de validar a cobertura dos testes e o funcionamento correto das rotas protegidas.</p>
+</body>
+</html>
